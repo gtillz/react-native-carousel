@@ -2,7 +2,8 @@ var React = require('react');
 var createReactClass = require('create-react-class');
 var {
   View,
-  ViewPagerAndroid,
+  // ViewPagerAndroid,
+  ScrollView
 } = require('react-native');
 
 var CarouselPager = createReactClass({
@@ -12,7 +13,8 @@ var CarouselPager = createReactClass({
       animated = true;
     }
     if (animated) {
-      this.refs.viewPager.setPage(page);
+      this.refs.scrollView.scrollTo({x: page * this.props.width, y: 0, animated: animated});
+    // this.refs.viewPager.setPage(page);
     } else {
       this.refs.viewPager.setPageWithoutAnimation(page);
     }
@@ -24,7 +26,7 @@ var CarouselPager = createReactClass({
   },
 
   render() {
-    return <ViewPagerAndroid
+    return <ScrollView
       ref="viewPager"
       style={{flex: 1}}
       contentContainerStyle={this.props.contentContainerStyle}
@@ -37,7 +39,7 @@ var CarouselPager = createReactClass({
       scrollsToTop={false}
       >
         {this.props.children.map((c, idx) => <View key={idx} style={{flex: 1}}>{c}</View>)}
-      </ViewPagerAndroid>;
+      </ScrollView>;
   },
 });
 
