@@ -25,6 +25,11 @@ var CarouselPager = createReactClass({
     this.props.onEnd(page);
   },
 
+  _onMomentumScrollEnd(e) {
+    var activePage = e.nativeEvent.contentOffset.x / this.props.width;
+    this.props.onEnd(activePage);
+  },
+
   render() {
     return <ScrollView
       ref="viewPager"
@@ -32,10 +37,11 @@ var CarouselPager = createReactClass({
       contentContainerStyle={this.props.contentContainerStyle}
       automaticallyAdjustContentInsets={false}
       horizontal={true}
+      pagingEnabled={true}
       showsHorizontalScrollIndicator={false}
       bounces={false}
-      onPageScroll={this.props.onBegin}
-      onPageSelected={(e) => this._onPageSelected(e.nativeEvent.position)}
+      onScrollBeginDrag={this.props.onBegin}
+      onMomentumScrollEnd={this._onMomentumScrollEnd}
       scrollsToTop={false}
       >
         {this.props.children.map((c, idx) => <View key={idx} style={{flex: 1}}>{c}</View>)}
