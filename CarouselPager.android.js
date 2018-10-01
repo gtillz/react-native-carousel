@@ -13,7 +13,7 @@ var CarouselPager = createReactClass({
       animated = true;
     }
     if (animated) {
-      this.refs.scrollView.scrollTo({x: page * this.props.width, y: 0, animated: animated});
+      this.refs.viewPager.scrollTo({x: page * this.props.width, y: 0, animated: animated});
     // this.refs.viewPager.setPage(page);
     } else {
       this.refs.viewPager.setPageWithoutAnimation(page);
